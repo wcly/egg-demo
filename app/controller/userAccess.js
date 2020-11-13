@@ -30,7 +30,7 @@ class UserAccessController extends Controller {
     async logout() {
         const { ctx, service } = this
         await service.userAccess.logout()
-        ctx.helper.success(ctx)
+        ctx.helper.success({ctx})
     }
 }
 

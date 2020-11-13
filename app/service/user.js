@@ -18,7 +18,7 @@ class UserService extends Service {
      */
     async findByMobile(mobile) {
         const { ctx } = this
-        return ctx.model.User.find({ mobile })
+        return ctx.model.User.findOne({ mobile })
     }
 }
 

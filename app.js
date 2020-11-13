@@ -13,10 +13,10 @@ class AppBootHook {
         // 注意：此函数只支持同步调用
 
         // 例如：参数中的密码是加密的，在此处进行解密
-        this.app.config.mysql.password = decrypt(this.app.config.mysql.password);
+        // this.app.config.mysql.password = decrypt(this.app.config.mysql.password);
         // 例如：插入一个中间件到框架的 coreMiddleware 之间
-        const statusIdx = this.app.config.coreMiddleware.indexOf('status');
-        this.app.config.coreMiddleware.splice(statusIdx + 1, 0, 'limit');
+        // const statusIdx = this.app.config.coreMiddleware.indexOf('status');
+        // this.app.config.coreMiddleware.splice(statusIdx + 1, 0, 'limit');
     }
 
     async didLoad() {
@@ -24,13 +24,13 @@ class AppBootHook {
         // 可以用来加载应用自定义的文件，启动自定义的服务
 
         // 例如：创建自定义应用的示例
-        this.app.queue = new Queue(this.app.config.queue);
-        await this.app.queue.init();
+        // this.app.queue = new Queue(this.app.config.queue);
+        // await this.app.queue.init();
 
         // 例如：加载自定义的目录
-        this.app.loader.loadToContext(path.join(__dirname, 'app/tasks'), 'tasks', {
-            fieldClass: 'tasksClasses',
-        });
+        // this.app.loader.loadToContext(path.join(__dirname, 'app/tasks'), 'tasks', {
+        //     fieldClass: 'tasksClasses',
+        // });
     }
 
     async willReady() {
@@ -38,16 +38,16 @@ class AppBootHook {
         // 可以做一些数据初始化等操作，这些操作成功才会启动应用
 
         // 例如：从数据库加载数据到内存缓存
-        this.app.cacheData = await this.app.model.query(QUERY_CACHE_SQL);
+        // this.app.cacheData = await this.app.model.query(QUERY_CACHE_SQL);
     }
 
     async didReady() {
         // 应用已经启动完毕
-
+        console.log('========Init Data=========')
         const ctx = await this.app.createAnonymousContext();
-        await ctx.modal.User.remove();
+        await ctx.model.User.deleteMany();
 
-        await ctx.server.user.create({
+        await ctx.service.user.create({
             mobile: '13452445569',
             password: '111111',
             realName: 'Jerry',

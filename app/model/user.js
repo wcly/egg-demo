@@ -8,5 +8,6 @@ module.exports = app => {
         extra: { type: mongoose.Schema.Types.Mixed },
         createdAt: { type: Date, default: Date.now }
     })
+    mongoose.set('useCreateIndex', true);
     return mongoose.model('User', UserSchema)
 }

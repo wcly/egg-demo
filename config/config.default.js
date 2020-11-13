@@ -27,13 +27,15 @@ module.exports = appInfo => {
       enable: true,
     },
     mongoose: {
-      url: 'mongodb://127.0.0.1:27017/egg_x',
+      url: 'mongodb://root:root@127.0.0.1:27017/egg_x?authSource=admin',
       options: {
-        // useMongoClient: ture,
-        autoReconnect: true,
-        reconnectTries: Number.MAX_VALUE,
+        // useMongoClient: true,
+        // autoReconnect: true,
+        // reconnectTries: Number.MAX_VALUE,
         bufferMaxEntries: 0,
-      }
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
     },
     jwt: {
       secret: 'egg-demo-secret',

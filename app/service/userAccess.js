@@ -14,6 +14,9 @@ class UserAccessService extends Service {
         // 生成Token令牌
         return {token: await service.actionToken.apply(user._id)}
     }
+    async logout() {
+        
+    }
 }
 
 module.exports = UserAccessService
